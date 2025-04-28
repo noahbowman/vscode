@@ -145,7 +145,7 @@ export class InstallCountWidget extends ExtensionWidget {
 	}
 }
 
-export class RatingsWidget extends ExtensionWidget {
+export class RatingsWidget extends ExtensionWidget { // TODO
 
 	private containerHover: IManagedHover | undefined;
 	private readonly disposables = this._register(new DisposableStore());
