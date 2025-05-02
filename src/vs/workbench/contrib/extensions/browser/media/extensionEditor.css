@@ -168,6 +168,11 @@
 	margin-right: 6px;
 }
 
+.extension-editor > .header > .details > .subtitle > .subtitle-entry {
+	display: flex;
+    align-items: center;
+}
+
 .extension-editor > .header > .details > .subtitle > .subtitle-entry:not(:empty):not(.last-non-empty) {
 	border-right: 1px solid rgba(128, 128, 128, 0.7);
 	margin-right: 14px;

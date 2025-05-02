@@ -308,6 +308,25 @@ export class ExtensionEditor extends EditorPane {
 		subTitleEntryContainers.push(ratingsContainer);
 		const ratingsWidget = this.instantiationService.createInstance(RatingsWidget, ratingsContainer, false);
 
+		const layout = () => {
+			const small = (this.dimension && this.dimension.width < 700) ?? false;
+
+			if (installCountWidget.small !== small) {
+				installCountWidget.small = small;
+				installCountWidget.update();
+			}
+
+			if (ratingsWidget.small !== small) {
+				ratingsWidget.small = small;
+				ratingsWidget.update();
+			}
+		};
+
+		layout();
+
+		this.layoutParticipants.push({ layout });
+		this.contentDisposables.add(toDisposable(arrays.insert(this.layoutParticipants, { layout })));
+
 		const sponsorContainer = append(subtitle, $('.subtitle-entry'));
 		subTitleEntryContainers.push(sponsorContainer);
 		const sponsorWidget = this.instantiationService.createInstance(SponsorWidget, sponsorContainer);

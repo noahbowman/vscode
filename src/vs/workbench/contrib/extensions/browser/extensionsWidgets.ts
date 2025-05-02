@@ -75,16 +75,19 @@ export function onClick(element: HTMLElement, callback: () => void): IDisposable
 
 export class InstallCountWidget extends ExtensionWidget {
 
+	private _small: boolean;
 	private readonly disposables = this._register(new DisposableStore());
 
 	constructor(
 		readonly container: HTMLElement,
-		private small: boolean,
+		small: boolean,
 		@IHoverService private readonly hoverService: IHoverService,
 	) {
 		super();
-		this.render();
 
+		this._small = small;
+
+		this.render();
 		this._register(toDisposable(() => this.clear()));
 	}
 
@@ -92,6 +95,10 @@ export class InstallCountWidget extends ExtensionWidget {
 		this.container.innerText = '';
 		this.disposables.clear();
 	}
+
+	get small(): boolean { return this._small; }
+
+	set small(small: boolean) { this._small = small; }
 
 	render(): void {
 		this.clear();
@@ -148,18 +155,21 @@ export class InstallCountWidget extends ExtensionWidget {
 export class RatingsWidget extends ExtensionWidget {
 
 	private containerHover: IManagedHover | undefined;
+	private _small: boolean;
 	private readonly disposables = this._register(new DisposableStore());
 
 	constructor(
 		readonly container: HTMLElement,
-		private small: boolean,
+		small: boolean,
 		@IHoverService private readonly hoverService: IHoverService,
 		@IOpenerService private readonly openerService: IOpenerService,
 	) {
 		super();
 		container.classList.add('extension-ratings');
 
-		if (this.small) {
+		this._small = small;
+
+		if (this._small) {
 			container.classList.add('small');
 		}
 
@@ -171,6 +181,10 @@ export class RatingsWidget extends ExtensionWidget {
 		this.container.innerText = '';
 		this.disposables.clear();
 	}
+
+	get small(): boolean { return this._small; }
+
+	set small(small: boolean) { this._small = small; }
 
 	render(): void {
 		this.clear();
